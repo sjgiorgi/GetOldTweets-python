@@ -13,6 +13,20 @@ Expected package dependencies are listed in the "requirements.txt" file for PIP,
 pip install -r requirements.txt
 ```
 
+Common error
+```
+Exception Value:    
+dlopen(/Users/User_Name/Documents/App_Name/lib/python2.7/site-packages/lxml/etree.so, 2): Library not loaded: libxml2.2.dylib
+Referenced from: /Users/User_Name/Documents/App_Name/lib/python2.7/site-packages/lxml/etree.so
+Reason: Incompatible library version: etree.so requires version 12.0.0 or later, but libxml2.2.dylib provides version 10.0.0
+```
+
+can be fixed with
+
+```
+conda install -f lxml
+```
+
 ## Components
 - **Tweet:** Model class to give some informations about a specific tweet.
   - id (str)
@@ -95,3 +109,8 @@ pip install -r requirements.txt
 ```
     python Exporter.py --username "barackobama" --maxtweets 10 --toptweets
 ```
+
+## Changes
+
+- Writes csv outut using `unicodecsv` module
+- Output contains numeric user id

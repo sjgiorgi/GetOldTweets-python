@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys,getopt,datetime,codecs
+import unicodecsv as csv
 if sys.version_info[0] < 3:
     import got
 else:
@@ -54,16 +55,17 @@ def main(argv):
 
 			elif opt == '--output':
 				outputFileName = arg
-				
-		outputFile = codecs.open(outputFileName, "w+", "utf-8")
 
-		outputFile.write('username;date;retweets;favorites;text;geo;mentions;hashtags;id;permalink')
+		outputFile = open(outputFileName, "wb")
+		writer = csv.writer(outputFile, delimiter=',', quoting=csv.QUOTE_ALL)
+
+		writer.writerow(['username', 'date', 'retweets', 'favorites', 'text', 'geo', 'mentions', 'hashtags', 'id', 'uid', 'permalink'])
 
 		print('Searching...\n')
 
 		def receiveBuffer(tweets):
 			for t in tweets:
-				outputFile.write(('\n%s;%s;%d;%d;"%s";%s;%s;%s;"%s";%s' % (t.username, t.date.strftime("%Y-%m-%d %H:%M"), t.retweets, t.favorites, t.text, t.geo, t.mentions, t.hashtags, t.id, t.permalink)))
+				writer.writerow([t.username, t.date.strftime("%Y-%m-%d %H:%M"), t.retweets, t.favorites, t.text, t.geo, t.mentions, t.hashtags, t.id, t.uid, t.permalink])
 			outputFile.flush()
 			print('More %d saved on file...\n' % len(tweets))
 

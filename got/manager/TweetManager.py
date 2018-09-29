@@ -44,6 +44,7 @@ class TweetManager:
 				favorites = int(tweetPQ("span.ProfileTweet-action--favorite span.ProfileTweet-actionCount").attr("data-tweet-stat-count").replace(",", ""))
 				dateSec = int(tweetPQ("small.time span.js-short-timestamp").attr("data-time"))
 				id = tweetPQ.attr("data-tweet-id")
+				uid = tweetPQ.attr("data-user-id")
 				permalink = tweetPQ.attr("data-permalink-path")
 				
 				geo = ''
@@ -52,6 +53,7 @@ class TweetManager:
 					geo = geoSpan.attr('title')
 				
 				tweet.id = id
+				tweet.uid = uid
 				tweet.permalink = 'https://twitter.com' + permalink
 				tweet.username = usernameTweet
 				tweet.text = txt
