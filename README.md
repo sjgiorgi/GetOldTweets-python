@@ -31,6 +31,7 @@ conda install -f lxml
 - **Tweet:** Model class to give some informations about a specific tweet.
   - id (str)
   - permalink (str)
+  - uid (str)
   - username (str)
   - text (str)
   - date (date)
